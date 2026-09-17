@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Siswa SMK</title>
+    
+    <!-- Menggunakan Font Modern dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================================
+           CSS VARIABLES (TEMA WARNA) & LIGHT/DARK MODE
+           ========================================================= */
+        :root {
+            --bg-color: #f3f6f9;
+            --text-color: #2d3436;
+            --card-bg: #ffffff;
+            --primary-color: #6c5ce7;
+            --primary-hover: #5b4bc4;
+            --secondary-color: #00b894;
+            --shadow: 0 10px 20px rgba(0,0,0,0.05);
+            --border-radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #dfe6e9;
+            --card-bg: #1e272e;
+            --primary-color: #a29bfe;
+            --primary-hover: #8c82f9;
+            --shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* =========================================================
+           RESET & DASAR
+           ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =========================================================
+           NAVIGASI (HEADER)
+           ========================================================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tombol Toggle Tema & Hamburger */
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        /* =========================================================
+           LAYOUT UTAMA & SECTION
+           ========================================================= */
+        main {
+            max-width: 1200px;
+            margin: 100px auto 2rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #home {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-img-container {
+            text-align: center;
+        }
+
+        .hero-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .hero-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .motto {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Card Layouts */
+        .card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        /* =========================================================
+           PANEL EDIT & FORM (INTERAKTIF)
+           ========================================================= */
+        #edit-panel {
+            position: fixed;
+            top: 0;
+            right: -400px; /* Tersembunyi di luar layar */
+            width: 400px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+            transition: right 0.4s ease;
+        }
+
+        #edit-panel.active {
+            right: 0;
+        }
+
+        .edit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        #fab-edit {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1500;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #fab-edit:hover {
+            transform: scale(1.1);
+        }
+
+        /* Notifikasi (Toast) */
+        #toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            transition: bottom 0.5s ease;
+            z-index: 3000;
+            font-weight: 600;
+        }
+
+        #toast.show {
+            bottom: 2rem;
+        }
+
+        /* Back to top */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1500;
+            display: none;
+            transition: var(--transition);
+        }
+
+        /* =========================================================
+           RESPONSIVE (MOBILE)
+           ========================================================= */
+        @media (max-width: 768px) {
+            #home {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-img {
+                width: 250px;
+                height: 250px;
+            }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--card-bg);
+                width: 100%;
+                text-align: center;
+                padding: 2rem 0;
+                box-shadow: var(--shadow);
+                transition: 0.3s;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            #edit-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigasi -->
+    <header>
+        <nav>
+            <div class="logo">Porto<span style="color:var(--text-color)">Siswa</span></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tentang-saya">Tentang Saya</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#cita-cita">Cita-Cita</a></li>
+            </ul>
+            <div class="controls">
+                <button class="btn-icon" id="theme-toggle" title="Ubah Tema">🌓</button>
+                <button class="btn-icon hamburger" id="hamburger">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <main>
+        <!-- Section: Home / Hero -->
+        <section id="home">
+            <div class="hero-text">
+                <h1 id="display-namaLengkap">(NAMA LENGKAP)</h1>
+                <h2>Halo, panggil saja <span id="display-namaPanggilan">(NAMA PANGGILAN)</span> 👋</h2>
+                <div>
+                    <span class="badge" id="display-kelas">(KELAS)</span>
+                    <span class="badge" id="display-jurusan">(JURUSAN)</span>
+                </div>
+                <p class="motto" id="display-motto">"(MOTTO/TAGLINE)"</p>
+                <div class="hero-btns">
+                    <a href="#tentang-saya" class="btn btn-primary">Tentang Saya</a>
+                    <a href="#profil" class="btn btn-outline">Lihat Profil</a>
+                </div>
+            </div>
+            <div class="hero-img-container">
+                <img src="" alt="Foto Profil" class="hero-img" id="display-fotoProfil">
+            </div>
+        </section>
+
+        <!-- Section: Tentang Saya -->
+        <section id="tentang-saya">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="card">
+                <p id="display-tentangSaya">(TENTANG SAYA)</p>
+            </div>
+        </section>
+
+        <!-- Section: Profil (Minat, Hobi, Konsentrasi) -->
+        <section id="profil">
+            <h2 class="section-title">Profil & Minat</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>🎯 Minat</h3>
+                    <p id="display-minat" style="margin-top:1rem;">(MINAT)</p>
+                </div>
+                <div class="card">
+                    <h3>🎨 Hobi</h3>
+                    <p id="display-hobi" style="margin-top:1rem;">(HOBI)</p>
+                </div>
+                <div class="card">
+                    <h3>📚 Ingin Dipelajari</h3>
+                    <p id="display-bidangBelajar" style="margin-top:1rem;">(BIDANG YANG DIPELAJARI)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Cita-Cita -->
+        <section id="cita-cita">
+            <h2 class="section-title">Cita-Cita & Impian</h2>
+            <div class="card" style="text-align: center;">
+                <h1 style="font-size: 3rem; margin-bottom: 1rem;">🚀</h1>
+                <h3>Masa depan yang ingin saya capai:</h3>
+                <h2 style="color: var(--primary-color); margin-top: 1rem; font-size: 2rem;" id="display-citaCita">(CITA-CITA)</h2>
+            </div>
+        </section>
+    </main>
+
+    <!-- Tombol Floating untuk Membuka Edit Panel -->
+    <button id="fab-edit" title="Edit Profil">✏️</button>
+
+    <!-- Tombol Kembali ke Atas -->
+    <button id="back-to-top" title="Ke Atas">⬆️</button>
+
+    <!-- Panel Edit Profil (Tersembunyi secara default) -->
+    <div id="edit-panel">
+        <div class="edit-header">
+            <h2>Edit Profil</h2>
+            <button class="btn-icon" id="close-edit">❌</button>
+        </div>
+        <p style="margin-bottom: 1.5rem; font-size: 0.85rem; color: #888;">
+            Ubah data di bawah ini. Tampilan website akan berubah otomatis (Live Preview). Jangan lupa klik "Simpan" agar data tidak hilang.
+        </p>
+
+        <!-- Form Input Data -->
+        <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" id="input-namaLengkap">
+        </div>
+        <div class="form-group">
+            <label>Nama Panggilan</label>
+            <input type="text" id="input-namaPanggilan">
+        </div>
+        <div class="form-group">
+            <label>Link Foto Profil (URL)</label>
+            <input type="text" id="input-fotoProfil" placeholder="Bisa pakai link Google Drive">
+        </div>
+        <div class="form-group">
+            <label>Kelas</label>
+            <input type="text" id="input-kelas">
+        </div>
+        <div class="form-group">
+            <label>Jurusan</label>
+            <input type="text" id="input-jurusan">
+        </div>
+        <div class="form-group">
+            <label>Motto / Tagline</label>
+            <input type="text" id="input-motto">
+        </div>
+        <div class="form-group">
+            <label>Tentang Saya</label>
+            <textarea id="input-tentangSaya" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Minat</label>
+            <input type="text" id="input-minat">
+        </div>
+        <div class="form-group">
+            <label>Hobi</label>
+            <input type="text" id="input-hobi">
+        </div>
+        <div class="form-group">
+            <label>Bidang yang Ingin Dipelajari</label>
+            <input type="text" id="input-bidangBelajar">
+        </div>
+        <div class="form-group">
+            <label>Cita-Cita</label>
+            <input type="text" id="input-citaCita">
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" id="btn-save" style="flex:1;">Simpan</button>
+            <button class="btn btn-outline" id="btn-reset" style="flex:1;">Reset Default</button>
+        </div>
+    </div>
+
+    <!-- Elemen Toast Notifikasi -->
+    <div id="toast">Notifikasi</div>
+
+    <!-- =========================================================
+         JAVASCRIPT VANILLA
+         ========================================================= -->
+    <script>
+        /**
+         * 1. MANAJEMEN DATA (Default dan LocalStorage)
+         * Data default ini sengaja disiapkan sebagai template awal.
+         */
+        const defaultData = {
+            namaLengkap: "Ruli Lesmana",
+            namaPanggilan: "Ruli",
+            fotoProfil: "https://drive.google.com/file/d/1WVqFBEAzktCgqFCswvzLwL5tTQJMqe7l/view?usp=sharing",
+            kelas: "X DKV 2",
+            jurusan: "Desain Komunikasi Visual",
+            motto: "MOTTO/TAGLINE",
+            tentangSaya: "TENTANG SAYA",
+            minat: "MINAT",
+            hobi: "Blogging, Membaca",
+            bidangBelajar: "Website",
+            citaCita: "Programer"
+        };
+
+        // Objek untuk menampung data saat ini
+        let currentData = {};
+
+        // Helper: Mengubah Link Google Drive "view" menjadi "Direct Download/Preview"
+        function formatImageUrl(url) {
+            if (!url) return '';
+            // Cek apakah itu link Google Drive
+            const gdriveMatch = url.match(/\/d\/(.+?)\//);
+            if (gdriveMatch && gdriveMatch[1]) {
+                return `https://drive.google.com/uc?export=view&id=${gdriveMatch[1]}`;
+            }
+            return url;
+        }
+
+        /**
+         * 2. FUNGSI RENDER (Menampilkan Data ke Layar)
+         */
+        function renderUI() {
+            // Ambil semua kunci (keys) dari objek data
+            Object.keys(currentData).forEach(key => {
+                const displayElement = document.getElementById(`display-${key}`);
+                const inputElement = document.getElementById(`input-${key}`);
+                
+                let val = currentData[key];
+
+                // Render ke elemen tampilan
+                if (displayElement) {
+                    if (key === 'fotoProfil') {
+                        displayElement.src = formatImageUrl(val) || 'https://via.placeholder.com/300?text=Foto+Profil';
+                    } else {
+                        // Tampilkan placeholder kapital jika data kosong
+                        displayElement.textContent = val ? val : `(${key.replace(/([A-Z])/g, ' $1').toUpperCase()})`;
+                    }
+                }
+
+                // Sinkronisasi dengan form input
+                if (inputElement) {
+                    inputElement.value = val;
+                }
+            });
+        }
+
+        /**
+         * 3. INISIALISASI APLIKASI
+         */
+        function initApp() {
+            // Coba ambil data dari localStorage
+            const savedData = localStorage.getItem('portoSiswaData');
+            if (savedData) {
+                currentData = JSON.parse(savedData);
+            } else {
+                // Jika belum ada, gunakan default (Copy objek)
+                currentData = { ...defaultData };
+            }
+            renderUI();
+        }
+
+        /**
+         * 4. LIVE PREVIEW (Event Listeners pada Form)
+         */
+        const inputs = document.querySelectorAll('#edit-panel input, #edit-panel textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                // Ekstrak nama kunci (key) dari id, contoh: "input-namaLengkap" -> "namaLengkap"
+                const key = e.target.id.split('-')[1];
+                currentData[key] = e.target.value;
+                
+                // Khusus untuk gambar, langsung render. Untuk teks, cukup ganti textContent
+                if(key === 'fotoProfil') {
+                    document.getElementById(`display-fotoProfil`).src = formatImageUrl(currentData[key]) || 'https://via.placeholder.com/300';
+                } else {
+                    const displayElement = document.getElementById(`display-${key}`);
+                    displayElement.textContent = currentData[key] ? currentData[key] : `(${key.toUpperCase()})`;
+                }
+            });
+        });
+
+        /**
+         * 5. AKSI TOMBOL SIMPAN & RESET
+         */
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        document.getElementById('btn-save').addEventListener('click', () => {
+            localStorage.setItem('portoSiswaData', JSON.stringify(currentData));
+            showToast("Data berhasil disimpan!");
+            document.getElementById('edit-panel').classList.remove('active');
+        });
+
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            if(confirm("Yakin ingin mengembalikan data ke pengaturan awal?")) {
+                currentData = { ...defaultData };
+                localStorage.setItem('portoSiswaData', JSON.stringify(currentData));
+                renderUI();
+                showToast("Data dikembalikan ke default!");
+            }
+        });
+
+        /**
+         * 6. INTERAKSI UI (Tema, Navigasi, Panel)
+         */
+        
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme');
+        if(currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if(isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Hamburger Menu (Mobile)
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Panel Edit Toggle
+        document.getElementById('fab-edit').addEventListener('click', () => {
+            document.getElementById('edit-panel').classList.add('active');
+        });
+        document.getElementById('close-edit').addEventListener('click', () => {
+            document.getElementById('edit-panel').classList.remove('active');
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Menutup menu mobile saat link diklik
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Jalankan aplikasi pertama kali
+        initApp();
+
+    </script>
+</body>
+</html>
